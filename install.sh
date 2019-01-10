@@ -6,7 +6,7 @@
 # Web:     
 #
 # Program:
-#   Install yiimp on Ubuntu 16.04 running Nginx, MariaDB, and php7.0.x
+#   Install yiimp on Ubuntu 16.04 running Nginx, MariaDB, and php7.2.x
 # 
 # 
 ################################################################################
@@ -104,11 +104,11 @@ default         0;
     output " "
     sleep 3
     
-    sudo aptitude -y install php7.0-fpm
-    sudo aptitude -y install php7.0-opcache php7.0-fpm php7.0 php7.0-common php7.0-gd php7.0-mysql php7.0-imap php7.0-cli php7.0-cgi php-pear php-auth php7.0-mcrypt mcrypt imagemagick libruby php7.0-curl php7.0-intl php7.0-pspell php7.0-recode php7.0-sqlite3 php7.0-tidy php7.0-xmlrpc php7.0-xsl memcached php-memcache php-imagick php-gettext php7.0-zip php7.0-mbstring
+    sudo aptitude -y install php7.2-fpm
+    sudo aptitude -y install php7.2-opcache php7.2-fpm php7.2 php7.2-common php7.2-gd php7.2-mysql php7.2-imap php7.2-cli php7.2-cgi php-pear php-auth php7.2-mcrypt mcrypt imagemagick libruby php7.2-curl php7.2-intl php7.2-pspell php7.2-recode php7.2-sqlite3 php7.2-tidy php7.2-xmlrpc php7.2-xsl memcached php-memcache php-imagick php-gettext php7.2-zip php7.2-mbstring
     sudo phpenmod mcrypt
     sudo phpenmod mbstring
-    sudo systemctl start php7.0-fpm.service
+    sudo systemctl start php7.2-fpm.service
     
     
     # Installing other needed files
@@ -398,7 +398,7 @@ exec bash
     
         location ~ ^/index\.php$ {
             fastcgi_split_path_info ^(.+\.php)(/.+)$;
-            fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+            fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
             fastcgi_index index.php;
             include fastcgi_params;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -430,7 +430,7 @@ exec bash
     		deny all;
   	}
   		location ~ /phpmyadmin/(.+\.php)$ {
-    		fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+    		fastcgi_pass unix:/run/php/php7.2-fpm.sock;
     		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     		include fastcgi_params;
     		include snippets/fastcgi-php.conf;
@@ -441,7 +441,7 @@ exec bash
 
     sudo ln -s /etc/nginx/sites-available/$server_name.conf /etc/nginx/sites-enabled/$server_name.conf
     sudo ln -s /var/web /var/www/$server_name/html
-    sudo systemctl reload php7.0-fpm.service
+    sudo systemctl reload php7.2-fpm.service
     sudo systemctl restart nginx.service
 	
     if [[ ("$ssl_install" == "y" || "$ssl_install" == "Y" || "$ssl_install" == "") ]]; then
@@ -521,7 +521,7 @@ exec bash
         
             location ~ ^/index\.php$ {
                 fastcgi_split_path_info ^(.+\.php)(/.+)$;
-                fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+                fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
                 fastcgi_index index.php;
                 include fastcgi_params;
                 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -552,7 +552,7 @@ exec bash
     		deny all;
   	}
   		location ~ /phpmyadmin/(.+\.php)$ {
-    		fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+    		fastcgi_pass unix:/run/php/php7.2-fpm.sock;
     		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     		include fastcgi_params;
     		include snippets/fastcgi-php.conf;
@@ -563,7 +563,7 @@ exec bash
 ' | sudo -E tee /etc/nginx/sites-available/$server_name.conf >/dev/null 2>&1
 	fi
 	
-	sudo systemctl reload php7.0-fpm.service
+	sudo systemctl reload php7.2-fpm.service
 	sudo systemctl restart nginx.service
 	
 	else
@@ -604,7 +604,7 @@ exec bash
     
         location ~ ^/index\.php$ {
             fastcgi_split_path_info ^(.+\.php)(/.+)$;
-            fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+            fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
             fastcgi_index index.php;
             include fastcgi_params;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -636,7 +636,7 @@ exec bash
     		deny all;
   	}
   		location ~ /phpmyadmin/(.+\.php)$ {
-    		fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+    		fastcgi_pass unix:/run/php/php7.2-fpm.sock;
     		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     		include fastcgi_params;
     		include snippets/fastcgi-php.conf;
@@ -647,7 +647,7 @@ exec bash
 
     sudo ln -s /etc/nginx/sites-available/$server_name.conf /etc/nginx/sites-enabled/$server_name.conf
     sudo ln -s /var/web /var/www/$server_name/html
-    sudo systemctl reload php7.0-fpm.service
+    sudo systemctl reload php7.2-fpm.service
     sudo systemctl restart nginx.service
 	
     if [[ ("$ssl_install" == "y" || "$ssl_install" == "Y" || "$ssl_install" == "") ]]; then
@@ -728,7 +728,7 @@ exec bash
         
             location ~ ^/index\.php$ {
                 fastcgi_split_path_info ^(.+\.php)(/.+)$;
-                fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+                fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
                 fastcgi_index index.php;
                 include fastcgi_params;
                 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -759,7 +759,7 @@ exec bash
     		deny all;
   	}
   		location ~ /phpmyadmin/(.+\.php)$ {
-    		fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+    		fastcgi_pass unix:/run/php/php7.2-fpm.sock;
     		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     		include fastcgi_params;
     		include snippets/fastcgi-php.conf;
@@ -770,7 +770,7 @@ exec bash
 ' | sudo -E tee /etc/nginx/sites-available/$server_name.conf >/dev/null 2>&1
 	
     fi
-    sudo systemctl reload php7.0-fpm.service
+    sudo systemctl reload php7.2-fpm.service
     sudo systemctl restart nginx.service
     fi
     
@@ -997,7 +997,7 @@ $configAlgoNormCoef = array(
     sudo chmod -R 775 /var/web/serverconfig.php
     sudo mv $HOME/yiimp/ $HOME/yiimp-install-only-do-not-run-commands-from-this-folder
     sudo rm -rf /var/log/nginx/*
-    sudo systemctl reload php7.0-fpm.service
+    sudo systemctl reload php7.2-fpm.service
     sudo systemctl restart nginx.service
 
 
